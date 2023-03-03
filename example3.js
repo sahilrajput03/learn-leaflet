@@ -21,6 +21,7 @@ const markerArray = [marker1, marker2, marker3]
 
 /** 
  * Zoom to a list of markers `markerArray`
+ * Source: - SO: How to set zoom level/view of leaflet map: [Click here](https://stackoverflow.com/questions/48450273/how-to-set-zoom-level-view-of-leaflet-map)
 */
 // Way 1: With `featureGroup`
 const group = new L.featureGroup(markerArray)
