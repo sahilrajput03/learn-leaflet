@@ -34,3 +34,7 @@ map.on('click', (e) => {
 		.setContent('You clicked the map at ' + e.latlng.toString())
 		.openOn(map)
 })
+
+var group = new L.featureGroup([marker1, marker2, marker3]);
+
+map.fitBounds(group.getBounds());
