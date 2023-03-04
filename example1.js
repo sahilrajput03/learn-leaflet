@@ -33,6 +33,7 @@ polygon.bindPopup('I am a polygon.')
 
 // You can also use popups as layers (when you need something more than attaching a popup to an object):
 // Here we use `openOn()` instead of addTo because it handles automatic closing of a previously opened popup when opening a new one which is good for usability.
+// SYNTAX: `setLatLng([latitude, longitude])`
 var popup = L.popup().setLatLng([51.513, -0.09]).setContent('I am a standalone popup.').openOn(map)
 
 // event object (e) has latlng property which is a location at which the click occurred.
