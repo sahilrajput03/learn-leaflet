@@ -40,9 +40,10 @@ const markerArray = [marker1, marker2, marker3, marker4]
 // const bounds = group.getBounds()
 // map.fitBounds(bounds)
 
-// Fit map to an area of square of side 600 miles (corresponds to zoomLevel=6)
-// map.fitBounds(map.getCenter().toBounds(DISTANCE))
-map.flyToBounds(map.getCenter().toBounds(DISTANCE))
+// Zoom map to an area of square of side 600 miles (corresponds to zoomLevel=6)
+// NOTE: We don't need to zoom to this square because we need to verify the entire map's bounds on page load (refer rectangle in the end of file).
+// map.fitBounds(map.getCenter().toBounds(DISTANCE)) // instant zoom
+// map.flyToBounds(map.getCenter().toBounds(DISTANCE)) // smooth zoom
 
 // Learn Shapes (official): Full Example: https://leaflet.github.io/Leaflet.draw/docs/examples/full.html
 // 1. map.getCenter() return type is `LatLng`
@@ -75,7 +76,10 @@ const rectangleOptions = {
 // Create rectangle and circle, and add them to map
 // rectangle: https://leafletjs.com/reference.html#rectangle , Circle: https://leafletjs.com/reference.html#circle
 var rectangle = L.rectangle(map.getCenter().toBounds(DISTANCE), rectangleOptions).addTo(map)
-var circle = L.circle(map.getCenter(), {radius: DISTANCE / 2, color: "red",}).addTo(map)
+var circle = L.circle(map.getCenter(), {radius: DISTANCE / 2, color: 'red'}).addTo(map)
+
+// Draw a rectangle to verify the entire map's bounds (i.e, verifying `map.getBounds()` works as expected)
+var visibleMapRect = L.rectangle(map.getBounds(), {fill: false, color: 'yellow'}).addTo(map)
 
 Object.assign(window, {r: rectangle, c: circle}) // BTW: All `var` variables are accessbile directly in browser console already
 
@@ -88,5 +92,8 @@ map.addEventListener('mousemove', function (ev) {
 	rectangle.setBounds(map.getCenter().toBounds(DISTANCE))
 
 	// update circle bounds
-	c.setLatLng(map.getCenter())
+	circle.setLatLng(map.getCenter())
+
+	// update visibleMapRect bounds
+	visibleMapRect.setBounds(map.getBounds())
 })
