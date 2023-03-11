@@ -84,16 +84,28 @@ var visibleMapRect = L.rectangle(map.getBounds(), {fill: false, color: 'yellow'}
 Object.assign(window, {r: rectangle, c: circle}) // BTW: All `var` variables are accessbile directly in browser console already
 
 // To get cener of map when the mouse is moved over the map (this updates even when the map panned (moved) via click-hold and drag way)
-map.addEventListener('mousemove', function (ev) {
+function updateElements() {
 	// Show/Update popup with the coordinates of center
 	popup.setLatLng(map.getCenter())
-
 	// update rectangle bounds
 	rectangle.setBounds(map.getCenter().toBounds(DISTANCE))
-
 	// update circle bounds
 	circle.setLatLng(map.getCenter())
-
 	// update visibleMapRect bounds
 	visibleMapRect.setBounds(map.getBounds())
+}
+
+// Update map on `movemove` event
+// NOTE: We don't need update map elements on mouse move event as we have official `moveend` and `zoomend` events for move (panning) and zoom user actions.
+// map.addEventListener('mousemove', function (ev) {
+// 	updateElements()
+// })
+
+// Update map on `zoomend` event
+map.on('zoomend', function () {
+	updateElements()
+})
+// Update map on `moveend` event
+map.on('moveend', function () {
+	updateElements()
 })
