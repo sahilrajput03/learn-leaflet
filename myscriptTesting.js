@@ -65,7 +65,7 @@ popup
 	.setContent('map center')
 	.openOn(map)
 
-// Draw rectangle
+// Browse all `options` at https://leafletjs.com/reference.html#path
 const rectangleOptions = {
 	// stroke: false, // default=true
 	fill: false, // default=true
@@ -79,7 +79,7 @@ var rectangle = L.rectangle(map.getCenter().toBounds(DISTANCE), rectangleOptions
 var circle = L.circle(map.getCenter(), {radius: DISTANCE / 2, color: 'red'}).addTo(map)
 
 // Draw a rectangle to verify the entire map's bounds (i.e, verifying `map.getBounds()` works as expected)
-var visibleMapRect = L.rectangle(map.getBounds(), {fill: false, color: 'yellow'}).addTo(map)
+var visibleMapRect = L.rectangle(map.getBounds(), {fill: false, color: 'yellow', weight: 8}).addTo(map)
 
 Object.assign(window, {r: rectangle, c: circle}) // BTW: All `var` variables are accessbile directly in browser console already
 
