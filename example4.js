@@ -101,6 +101,7 @@ function updateElements() {
 // 	updateElements()
 // })
 
+// Evented: https://leafletjs.com/reference.html#evented
 // Update map on `zoomend` event
 map.on('zoomend', function () {
 	updateElements()
@@ -109,3 +110,4 @@ map.on('zoomend', function () {
 map.on('moveend', function () {
 	updateElements()
 })
+// FYI: You can remove the event via `map.off('eventName', fn')`. Source: https://stackoverflow.com/a/10331170/10012446
